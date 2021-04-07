@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,16 +58,19 @@ public class ObrazovanjeRestController {
 		return new ResponseEntity<Obrazovanje>(HttpStatus.OK);
 	}
 	
+	@Transactional
 	@DeleteMapping("obrazovanje/{id}")
 	public ResponseEntity<Obrazovanje> deleteObrazovanje(@PathVariable("id") Integer id) {
 		if (!obrazovanjeRepository.existsById(id)) {
 			return new ResponseEntity<Obrazovanje>(HttpStatus.NO_CONTENT);
 		}
 		
+		jdbcTemplate.execute("DELETE FROM radnik WHERE obrazovanje = " + id);
+		
 		obrazovanjeRepository.deleteById(id);
 		
 		if (id == -100) {
-			String sql = "INSERT INTO \"obrazovanje\"(\"id\", \"naziv\", \"stepen_strucne_spreme\", \"opis\") VALUES (-100, 'ObrazovanjeNaziv', 'ObrazovanjeSSS', 'ObrazovanjeOpis')";
+			String sql = "INSERT INTO \"obrazovanje\"(\"id\", \"naziv\", \"stepen_strucne_spreme\", \"opis\") VALUES (-100, 'ONaziv', 'OSSS', 'OOpis')";
 			
 			jdbcTemplate.execute(sql);
 		}

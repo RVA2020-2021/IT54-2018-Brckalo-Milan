@@ -39,15 +39,18 @@ CREATE TABLE radnik (
 	sektor integer not null
 );
 
+-- OGRANIČENJE PRIMARNOG KLJUČA
 ALTER TABLE obrazovanje ADD CONSTRAINT pk_obrazovanje PRIMARY KEY (id);
 ALTER TABLE preduzece ADD CONSTRAINT pk_preduzece PRIMARY KEY (id);
 ALTER TABLE sektor ADD CONSTRAINT pk_sektor PRIMARY KEY (id);
 ALTER TABLE radnik ADD CONSTRAINT pk_radnik PRIMARY KEY (id);
 
+-- REFERENCIJALNO OGRANIČENJE
 ALTER TABLE sektor ADD CONSTRAINT fk_sektor_preduzece FOREIGN KEY (preduzece) REFERENCES preduzece(id);
 ALTER TABLE radnik ADD CONSTRAINT fk_radnik_sektor FOREIGN KEY (sektor) REFERENCES sektor(id);
 ALTER TABLE radnik ADD CONSTRAINT fk_radnik_obrazovanje FOREIGN KEY (obrazovanje) REFERENCES obrazovanje(id);
 
+-- INDEKSI
 CREATE INDEX idxpk_obrazovanje ON obrazovanje(id);
 CREATE INDEX idxpk_preduzece ON preduzece(id);
 CREATE INDEX idxpk_sektor ON sektor(id);
@@ -57,6 +60,7 @@ CREATE INDEX idxfk_sektor_preduzece ON sektor(preduzece);
 CREATE INDEX idxfk_radnik_sektor ON radnik(sektor);
 CREATE INDEX idxfk_radnik_obrazovanje ON radnik(obrazovanje);
 
+-- SEKVENCE
 CREATE SEQUENCE obrazovanje_seq INCREMENT 1;
 CREATE SEQUENCE preduzece_seq INCREMENT 1;
 CREATE SEQUENCE sektor_seq INCREMENT 1;
