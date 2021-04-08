@@ -19,7 +19,7 @@ import rva.jpa.Radnik;
 import rva.repository.RadnikRepository;
 
 @RestController
-public class RadnikRestRepository {
+public class RadnikRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
