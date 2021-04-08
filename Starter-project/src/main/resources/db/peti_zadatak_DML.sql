@@ -25,5 +25,5 @@ INSERT INTO radnik(id, ime, prezime, broj_lk, obrazovanje, sektor) VALUES (nextv
 -- TEST
 INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (-100, 'ONaziv', 'OSSS', 'OOpis');
 INSERT INTO preduzece(id, naziv, pib, sediste, opis) VALUES (-100, 'PNaziv', 1020, 'PSediste', 'POpis');
-INSERT INTO sektor(id, naziv, oznaka, preduzece) VALUES (-100, 'SNaziv', 'SOznaka', -100);
-INSERT INTO radnik(id, ime, prezime, broj_lk, obrazovanje, sektor) VALUES (-100, 'RIme', 'RPrz', 1234, -100, -100);
+INSERT INTO sektor(id, naziv, oznaka, preduzece) VALUES (-100, 'SNaziv', 'SOznaka', 1);
+INSERT INTO radnik(id, ime, prezime, broj_lk, obrazovanje, sektor) VALUES (-100, 'RIme', 'RPrz', 1234, 1, 1);

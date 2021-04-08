@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rva.jpa.Radnik;
@@ -30,9 +31,27 @@ public class RadnikRestRepository {
 		return radnikRepository.findAll();
 	}
 	
+	@GetMapping("radnik/q")
+	public Collection<Radnik> getListByQuery(@RequestParam(name="ime", required=false) String ime, @RequestParam(name="prezime", required=false) String prezime) {
+		if (ime != null) {
+			return radnikRepository.findRadnikByImeContainingIgnoreCase(ime);
+		}
+		
+		if (prezime != null) {
+			return radnikRepository.findRadnikByPrezimeContainingIgnoreCase(prezime);
+		}
+		
+		return null;
+	}
+	
 	@GetMapping("radnik/{id}")
 	public Radnik get(@PathVariable("id") Integer id) {
 		return radnikRepository.getOne(id);
+	}
+	
+	@GetMapping("radnik/lk/{lk}")
+	public Radnik getByBrojLk(@PathVariable("lk") Integer lk) {
+		return radnikRepository.findRadnikByBrojLk(lk);
 	}
 	
 	@PostMapping("radnik")
@@ -57,18 +76,17 @@ public class RadnikRestRepository {
 		return new ResponseEntity<Radnik>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("radnik/{id}") 
+	@DeleteMapping("radnik/{id}")
 	public ResponseEntity<Radnik> deleteRadnik(@PathVariable("id") Integer id) {
 		if (!radnikRepository.existsById(id)) {
 			return new ResponseEntity<Radnik>(HttpStatus.NO_CONTENT);
 		}
 		
-		radnikRepository.deleteById(id);
-		
 		if (id == -100) {
-			String sql = "INSERT INTO \"radnik\"(\"id\", \"ime\", \"prezime\", \"br_lk\", \"obrazovanje\", \"sektor\") VALUES (-100, 'RIme', 'RPrz', 1234, -100, -100)";
-			
-			jdbcTemplate.execute(sql);
+			jdbcTemplate.execute("DELETE FROM radnik WHERE id = -100");
+			jdbcTemplate.execute("INSERT INTO radnik(id, ime, prezime, broj_lk, obrazovanje, sektor) VALUES (-100, 'RIme', 'RPrz', 1234, 1, 1)");
+		} else {
+			radnikRepository.deleteById(id);
 		}
 		
 		return new ResponseEntity<Radnik>(HttpStatus.OK);

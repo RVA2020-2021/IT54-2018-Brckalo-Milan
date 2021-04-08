@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rva.jpa.Preduzece;
@@ -35,9 +37,19 @@ public class PreduzeceRestController {
 		return preduzeceRepository.findAll();
 	}
 	
+	@GetMapping("preduzece/q")
+	public Collection<Preduzece> getListByQuery(@RequestParam(name="naziv", required=false) String naziv) {
+		return preduzeceRepository.findListByNazivContainingIgnoreCase(naziv);
+	}
+	
 	@GetMapping("preduzece/{id}")
-	public Preduzece get(@PathVariable("id") Integer id) {
+	public Preduzece get(@PathVariable(name="id", required=false) Integer id) {
 		return preduzeceRepository.getOne(id);
+	}
+	
+	@GetMapping("preduzece/pib/{pib}")
+	public Preduzece getByPIB(@PathVariable(name="pib", required=false) Integer pib) {
+		return preduzeceRepository.findOneByPib(pib);
 	}
 	
 	@PostMapping("preduzece")
@@ -62,33 +74,34 @@ public class PreduzeceRestController {
 		return new ResponseEntity<Preduzece>(HttpStatus.OK);
 	}
 	
+	@Transactional
 	@DeleteMapping("preduzece/{id}")
 	public ResponseEntity<Preduzece> deletePreduzece(@PathVariable("id") Integer id) {	
 		if (!preduzeceRepository.existsById(id)) {
 			return new ResponseEntity<Preduzece>(HttpStatus.NO_CONTENT);
 		}
 		
-		String sektori = "(";
-		Collection<Sektor> sektoriByPreduzece = sektorRepository.findListByPreduzece(preduzeceRepository.getOne(id));
-		
-		if (sektoriByPreduzece.size() > 0) {
-			for (Sektor s : sektoriByPreduzece) {
-				sektori += s.getId() + ",";
+		if (id == -100) {
+			jdbcTemplate.execute("DELETE FROM preduzece WHERE id = -100");
+			jdbcTemplate.execute("INSERT INTO preduzece(id, naziv, pib, sediste, opis) VALUES (-100, 'PNaziv', 1020, 'PSediste', 'POpis')");
+		} else {
+			Collection<Sektor> sektoriByPreduzece = sektorRepository.findListByPreduzece(preduzeceRepository.getOne(id));
+			
+			if (sektoriByPreduzece.size() > 0) {
+				String sektori = "(";
+				
+				for (Sektor s : sektoriByPreduzece) {
+					sektori += s.getId() + ",";
+				}
+				
+				sektori = sektori.substring(0, sektori.length() - 1) + ")";
+				
+				jdbcTemplate.execute("DELETE FROM radnik WHERE sektor IN " + sektori);
 			}
 			
-			sektori = sektori.substring(0, sektori.length() - 1) + ")";
+			jdbcTemplate.execute("DELETE FROM sektor WHERE preduzece = " + id);
 			
-			jdbcTemplate.execute("DELETE FROM radnik WHERE sektor IN " + sektori);	
-		}
-		
-		jdbcTemplate.execute("DELETE FROM sektor WHERE preduzece = " + id);
-		
-		preduzeceRepository.deleteById(id);
-		
-		if (id == -100) {
-			String sql = "INSERT INTO \"preduzece\"(\"id\", \"naziv\", \"pib\", \"sediste\", \"opis\") VALUES (-100, 'PNaziv', 1020, 'PSediste', 'POpis')";
-			
-			jdbcTemplate.execute(sql);
+			preduzeceRepository.deleteById(id);
 		}
 		
 		return new ResponseEntity<Preduzece>(HttpStatus.OK);

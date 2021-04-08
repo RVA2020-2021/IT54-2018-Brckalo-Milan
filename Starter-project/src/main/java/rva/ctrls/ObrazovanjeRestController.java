@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rva.jpa.Obrazovanje;
@@ -29,6 +30,11 @@ public class ObrazovanjeRestController {
 	@GetMapping("obrazovanje")
 	public Collection<Obrazovanje> getList() {
 		return obrazovanjeRepository.findAll();
+	}
+	
+	@GetMapping("obrazovanje/q")
+	public Collection<Obrazovanje> getListByQuery(@RequestParam(name="naziv", required=false) String naziv) {
+		return obrazovanjeRepository.findListByNazivContainingIgnoreCase(naziv);
 	}
 	
 	@GetMapping("obrazovanje/{id}")
@@ -65,14 +71,13 @@ public class ObrazovanjeRestController {
 			return new ResponseEntity<Obrazovanje>(HttpStatus.NO_CONTENT);
 		}
 		
-		jdbcTemplate.execute("DELETE FROM radnik WHERE obrazovanje = " + id);
-		
-		obrazovanjeRepository.deleteById(id);
-		
 		if (id == -100) {
-			String sql = "INSERT INTO \"obrazovanje\"(\"id\", \"naziv\", \"stepen_strucne_spreme\", \"opis\") VALUES (-100, 'ONaziv', 'OSSS', 'OOpis')";
+			jdbcTemplate.execute("DELETE FROM obrazovanje WHERE id = -100");
+			jdbcTemplate.execute("INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (-100, 'ONaziv', 'OSSS', 'OOpis')");
+		} else {
+			jdbcTemplate.execute("DELETE FROM radnik WHERE obrazovanje = " + id);
 			
-			jdbcTemplate.execute(sql);
+			obrazovanjeRepository.deleteById(id);
 		}
 		
 		return new ResponseEntity<Obrazovanje>(HttpStatus.OK);

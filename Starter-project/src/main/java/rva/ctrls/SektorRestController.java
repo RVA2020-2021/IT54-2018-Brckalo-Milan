@@ -65,14 +65,13 @@ public class SektorRestController {
 			return new ResponseEntity<Sektor>(HttpStatus.NO_CONTENT);
 		}
 		
-		jdbcTemplate.execute("DELETE FROM radnik WHERE sektor = " + id);
-		
-		sektorRepository.deleteById(id);
-		
 		if (id == -100) {
-			String sql = "INSERT INTO \"sektor\"(\"id\", \"naziv\", \"oznaka\", \"preduzece\") VALUES (-100, 'SNaziv', 'SOznaka', -100)";
+			jdbcTemplate.execute("DELETE FROM sektor WHERE id = -100");
+			jdbcTemplate.execute("INSERT INTO sektor(id, naziv, oznaka, preduzece) VALUES (-100, 'SNaziv', 'SOznaka', 1)");
+		} else {
+			jdbcTemplate.execute("DELETE FROM radnik WHERE sektor = " + id);
 			
-			jdbcTemplate.execute(sql);
+			sektorRepository.deleteById(id);
 		}
 		
 		return new ResponseEntity<Sektor>(HttpStatus.OK);
