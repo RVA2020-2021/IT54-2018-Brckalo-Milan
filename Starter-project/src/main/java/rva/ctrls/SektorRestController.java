@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import rva.jpa.Sektor;
 import rva.repository.SektorRepository;
 
 @RestController
+@Api(tags= { "CRUD operacije za Sektor kontroler" })
 public class SektorRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -27,16 +30,19 @@ public class SektorRestController {
 	private SektorRepository sektorRepository;
 	
 	@GetMapping("sektor")
+	@ApiOperation(value="Vraca kolekciju svih sektora")
 	public Collection<Sektor> getList() {
 		return sektorRepository.findAll();
 	}
 	
 	@GetMapping("sektor/{id}")
+	@ApiOperation(value="Vraca sektor sa odgovarajucim ID-em")
 	public Sektor get(@PathVariable("id") Integer id) {
 		return sektorRepository.getOne(id);
 	}
 	
 	@PostMapping("sektor")
+	@ApiOperation(value="Kreira novi sektor")
 	public ResponseEntity<Sektor> insertSektor(@RequestBody Sektor sektor) {
 		if (!sektorRepository.existsById(sektor.getId())) {
 			sektorRepository.save(sektor);
@@ -48,6 +54,7 @@ public class SektorRestController {
 	}
 	
 	@PutMapping("sektor")
+	@ApiOperation(value="Azurira postojeci sektor")
 	public ResponseEntity<Sektor> updateSektor(@RequestBody Sektor sektor) {
 		if (!sektorRepository.existsById(sektor.getId())) {
 			return new ResponseEntity<Sektor>(HttpStatus.NO_CONTENT);
@@ -60,6 +67,7 @@ public class SektorRestController {
 	
 	@Transactional
 	@DeleteMapping("sektor/{id}")
+	@ApiOperation(value="Brise sektor i njene veze sa drugim tabelama")
 	public ResponseEntity<Sektor> deleteSektor(@PathVariable("id") Integer id) {
 		if (!sektorRepository.existsById(id)) {
 			return new ResponseEntity<Sektor>(HttpStatus.NO_CONTENT);
