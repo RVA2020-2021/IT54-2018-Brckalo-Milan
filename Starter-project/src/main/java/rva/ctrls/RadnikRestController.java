@@ -39,16 +39,8 @@ public class RadnikRestController {
 	
 	@GetMapping("radnik/q")
 	@ApiOperation(value="Vraca kolekciju radnika po imenu ili prezimenu")
-	public Collection<Radnik> getListByQuery(@RequestParam(name="ime", required=false) String ime, @RequestParam(name="prezime", required=false) String prezime) {
-		if (ime != null) {
-			return radnikRepository.findRadnikByImeContainingIgnoreCase(ime);
-		}
-		
-		if (prezime != null) {
-			return radnikRepository.findRadnikByPrezimeContainingIgnoreCase(prezime);
-		}
-		
-		return null;
+	public Collection<Radnik> getListByQuery(@RequestParam(name="ime", required=false, defaultValue="") String ime, @RequestParam(name="prezime", required=false, defaultValue="") String prezime) {
+		return radnikRepository.findByImeContainingIgnoreCaseOrPrezimeContainingIgnoreCase(ime, prezime);
 	}
 	
 	@GetMapping("radnik/{id}")
@@ -60,7 +52,7 @@ public class RadnikRestController {
 	@GetMapping("radnik/lk/{lk}")
 	@ApiOperation(value="Vraca radnika sa odgovarajucom licnom kartom")
 	public Radnik getByBrojLk(@PathVariable("lk") Integer lk) {
-		return radnikRepository.findRadnikByBrojLk(lk);
+		return radnikRepository.findByBrojLk(lk);
 	}
 	
 	@PostMapping("radnik")

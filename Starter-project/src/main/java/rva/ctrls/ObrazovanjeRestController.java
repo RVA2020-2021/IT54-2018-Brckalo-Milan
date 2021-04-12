@@ -41,7 +41,7 @@ public class ObrazovanjeRestController {
 	@GetMapping("obrazovanje/q")
 	@ApiOperation(value="Vraca kolekciju vrsta obrazovanja po nazivu")
 	public Collection<Obrazovanje> getListByQuery(@RequestParam(name="naziv", required=false) String naziv) {
-		return obrazovanjeRepository.findListByNazivContainingIgnoreCase(naziv);
+		return obrazovanjeRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
 	@GetMapping("obrazovanje/{id}")

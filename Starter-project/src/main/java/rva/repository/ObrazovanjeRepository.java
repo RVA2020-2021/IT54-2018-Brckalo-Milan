@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import rva.jpa.Obrazovanje;
 
 public interface ObrazovanjeRepository extends JpaRepository<Obrazovanje, Integer> {
-	Collection<Obrazovanje> findListByNazivContainingIgnoreCase(String naziv);
+	Collection<Obrazovanje> findByNazivContainingIgnoreCase(String naziv);
 }

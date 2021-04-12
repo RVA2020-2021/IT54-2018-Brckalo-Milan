@@ -8,5 +8,5 @@ import rva.jpa.Preduzece;
 import rva.jpa.Sektor;
 
 public interface SektorRepository extends JpaRepository<Sektor, Integer> {
-	Collection<Sektor> findListByPreduzece(Preduzece preduzece);
+	Collection<Sektor> findByPreduzece(Preduzece preduzece);
 }

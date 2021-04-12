@@ -46,7 +46,7 @@ public class PreduzeceRestController {
 	@GetMapping("preduzece/q")
 	@ApiOperation(value="Vraca kolekciju vrsta obrazovanja po nazivu")
 	public Collection<Preduzece> getListByQuery(@RequestParam(name="naziv", required=false) String naziv) {
-		return preduzeceRepository.findListByNazivContainingIgnoreCase(naziv);
+		return preduzeceRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
 	@GetMapping("preduzece/{id}")
@@ -58,7 +58,7 @@ public class PreduzeceRestController {
 	@GetMapping("preduzece/pib/{pib}")
 	@ApiOperation(value="Vraca preduzece sa odgovarajucim PIB-om")
 	public Preduzece getByPIB(@PathVariable(name="pib", required=false) Integer pib) {
-		return preduzeceRepository.findOneByPib(pib);
+		return preduzeceRepository.findByPib(pib);
 	}
 	
 	@PostMapping("preduzece")
@@ -97,7 +97,7 @@ public class PreduzeceRestController {
 			jdbcTemplate.execute("DELETE FROM preduzece WHERE id = -100");
 			jdbcTemplate.execute("INSERT INTO preduzece(id, naziv, pib, sediste, opis) VALUES (-100, 'PNaziv', 1020, 'PSediste', 'POpis')");
 		} else {
-			Collection<Sektor> sektoriByPreduzece = sektorRepository.findListByPreduzece(preduzeceRepository.getOne(id));
+			Collection<Sektor> sektoriByPreduzece = sektorRepository.findByPreduzece(preduzeceRepository.getOne(id));
 			
 			if (sektoriByPreduzece.size() > 0) {
 				String sektori = "(";

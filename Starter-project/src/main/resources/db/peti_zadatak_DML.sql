@@ -2,7 +2,7 @@ INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (nextval(
 INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (nextval('obrazovanje_seq'), 'Gradjevinski inzenjer', 'VI', NULL);
 INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (nextval('obrazovanje_seq'), 'IT inzenjer', 'VI', NULL);
 INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (nextval('obrazovanje_seq'), 'Diplomirani ekonomista', 'VI', NULL);
-INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (nextval('obrazovanje_seq'), 'Diplomirani pravnik', 'IV', NULL);
+INSERT INTO obrazovanje(id, naziv, stepen_strucne_spreme, opis) VALUES (nextval('obrazovanje_seq'), 'Diplomirani pravnik', 'VI', NULL);
 
 INSERT INTO preduzece(id, naziv, pib, sediste, opis) VALUES (nextval('preduzece_seq'), 'Aleksandar Group', 103975497, 'Novi Sad', NULL);
 INSERT INTO preduzece(id, naziv, pib, sediste, opis) VALUES (nextval('preduzece_seq'), 'Vega IT', 105723766, 'Novi Sad', NULL);
