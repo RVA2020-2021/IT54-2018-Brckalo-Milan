@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Peti Zadatak</span>
+  <span class="example-spacer"></span>
+  <button mat-mini-fab color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/obrazovanje">
+    <mat-icon color="accent">school</mat-icon>
+    <span>Obrazovanje</span>
+  </button>
+  <button mat-menu-item routerLink="/preduzece">
+    <mat-icon color="accent">apartment</mat-icon>
+    <span>Preduzeće</span>
+  </button>
+  <button mat-menu-item routerLink="/sektor">
+    <mat-icon color="accent">engineering</mat-icon>
+    <span>Sektor</span>
+  </button>
+  <button mat-menu-item routerLink="/radnik">
+    <mat-icon color="accent">people</mat-icon>
+    <span>Radnik</span>
+  </button>
+</mat-menu>
