@@ -9,43 +9,43 @@ DROP TABLE IF EXISTS sektor CASCADE;
 DROP TABLE IF EXISTS radnik CASCADE;
 
 CREATE TABLE obrazovanje (
-	id integer not null,
-	naziv varchar(100),
-	stepen_strucne_spreme varchar(10),
-	opis varchar(500)
+	id INTEGER NOT NULL,
+	naziv VARCHAR(100),
+	stepen_strucne_spreme VARCHAR(10),
+	opis VARCHAR(500)
 );
 
 CREATE TABLE preduzece (
-	id integer not null,
-	naziv varchar(100),
-	pib integer,
-	sediste varchar(100),
-	opis varchar(500)
+	id INTEGER NOT NULL,
+	naziv VARCHAR(100),
+	pib INTEGER,
+	sediste VARCHAR(100),
+	opis VARCHAR(500)
 );
 
 CREATE TABLE sektor (
-	id integer not null,
-	naziv varchar(100),
-	oznaka varchar(10),
-	preduzece integer not null
+	id INTEGER NOT NULL,
+	naziv VARCHAR(100),
+	oznaka VARCHAR(10),
+	preduzece INTEGER NOT NULL
 );
 
 CREATE TABLE radnik (
-	id integer not null,
-	ime varchar(50),
-	prezime varchar(50),
-	broj_lk integer,
-	obrazovanje integer not null,
-	sektor integer not null
+	id INTEGER NOT NULL,
+	ime VARCHAR(50),
+	prezime VARCHAR(50),
+	broj_lk INTEGER,
+	obrazovanje INTEGER NOT NULL,
+	sektor INTEGER NOT NULL
 );
 
--- OGRANIČENJE PRIMARNOG KLJUČA
+-- OGRANICENJE PRIMARNOG KLJUCA
 ALTER TABLE obrazovanje ADD CONSTRAINT pk_obrazovanje PRIMARY KEY (id);
 ALTER TABLE preduzece ADD CONSTRAINT pk_preduzece PRIMARY KEY (id);
 ALTER TABLE sektor ADD CONSTRAINT pk_sektor PRIMARY KEY (id);
 ALTER TABLE radnik ADD CONSTRAINT pk_radnik PRIMARY KEY (id);
 
--- REFERENCIJALNO OGRANIČENJE
+-- REFERENCIJALNO OGRANICENJE
 ALTER TABLE sektor ADD CONSTRAINT fk_sektor_preduzece FOREIGN KEY (preduzece) REFERENCES preduzece(id);
 ALTER TABLE radnik ADD CONSTRAINT fk_radnik_sektor FOREIGN KEY (sektor) REFERENCES sektor(id);
 ALTER TABLE radnik ADD CONSTRAINT fk_radnik_obrazovanje FOREIGN KEY (obrazovanje) REFERENCES obrazovanje(id);

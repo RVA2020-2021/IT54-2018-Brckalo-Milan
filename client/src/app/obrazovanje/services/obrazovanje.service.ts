@@ -26,15 +26,15 @@ export class ObrazovanjeService {
     return this.http.post<Obrazovanje>(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
   }
 
-  put(obrazovanjeId: number, obrazovanje: Obrazovanje): Observable<Obrazovanje> {
-    return this.http.put<Obrazovanje>(`${API.path}/obrazovanje/${obrazovanjeId}`, obrazovanje).pipe(catchError(this.handleError));
+  put(obrazovanje: Obrazovanje): Observable<Obrazovanje> {
+    return this.http.put<Obrazovanje>(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
   }
 
   delete(obrazovanjeId: number): Observable<unknown> {
     return this.http.delete(`${API.path}/${obrazovanjeId}`).pipe(catchError(this.handleError));
   }
 
-  private handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
     } else {

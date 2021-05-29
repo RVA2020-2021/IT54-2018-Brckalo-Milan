@@ -11,6 +11,7 @@ import { Obrazovanje } from '../../interfaces/obrazovanje.interface';
 import { ObrazovanjeService } from '../../services/obrazovanje.service';
 
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
+import { ObrazovanjeSingleComponent } from '../obrazovanje-single/obrazovanje-single.component';
 
 @Component({
   selector: 'app-obrazovanje-list',
@@ -26,9 +27,17 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private service: ObrazovanjeService, private dialog: MatDialog, ) {}
+  constructor(private service: ObrazovanjeService, private dialog: MatDialog) {}
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  loadData() {
     this.subscription = this.service.getList().subscribe((data: Obrazovanje[]) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
@@ -36,21 +45,19 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  editData(obrazovanje: Obrazovanje) {
+    const dialogRef = this.dialog.open(ObrazovanjeSingleComponent, { data: obrazovanje });
+
+    dialogRef.componentInstance.isUpdate = true;
+
+    dialogRef.afterClosed().subscribe(isUpdate => {
+      if (isUpdate) {
+        this.loadData();
+      }
+    });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  areYouSure(obrazovanjeId: number) {
+  deleteData(obrazovanjeId: number) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, { data: Boolean });
 
     dialogRef.afterClosed().subscribe(isConfirm => {
@@ -58,5 +65,15 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
         this.service.delete(obrazovanjeId);
       }
     });
+  }
+
+  filterData(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }
