@@ -11,6 +11,16 @@
         <input matInput placeholder="Oznaka" [(ngModel)]="data.oznaka" name="oznaka">
       </mat-form-field>
     </div>
+    <div class="form">
+      <mat-form-field color="accent" appearance="fill">
+        <mat-label>Preduzeće</mat-label>
+        <mat-select [(ngModel)]="data.preduzece" [value]="data.preduzece" name="preduzece" required>
+          <mat-option *ngFor="let p of (preduzece$ | async)" [value]="p">
+            {{p.naziv}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div mat-dialog-actions>
       <button mat-button (click)="cancel()">Poništi</button>
       <button mat-raised-button color="accent" (click)="save()">Sačuvaj</button>

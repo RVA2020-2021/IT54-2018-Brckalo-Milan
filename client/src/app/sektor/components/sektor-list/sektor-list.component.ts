@@ -23,7 +23,7 @@ import { Entity } from 'src/app/config/entity';
   styleUrls: ['./sektor-list.component.css']
 })
 export class SektorListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'naziv', 'oznaka', 'opcije'];
+  displayedColumns: string[] = ['id', 'naziv', 'oznaka', 'preduzece', 'opcije'];
   dataSource: MatTableDataSource<Sektor>;
 
   subscription: Subscription;
@@ -85,7 +85,8 @@ export class SektorListComponent implements OnInit {
     const dialogRef = this.dialog.open(SektorDialogComponent, { data: { 
       id: 0,
       naziv: null, 
-      oznaka: null
+      oznaka: null,
+      preduzece: null
     }});
 
     dialogRef.componentInstance.isUpdate = false;

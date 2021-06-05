@@ -11,6 +11,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { RadnikRoutingModule } from './radnik-routing.module';
 
@@ -39,6 +41,8 @@ import { RadnikService } from './services/radnik.service';
     MatButtonModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatSelectModule,
+    MatChipsModule,
     RadnikRoutingModule
   ],
   providers: [RadnikService]

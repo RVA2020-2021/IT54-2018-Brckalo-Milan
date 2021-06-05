@@ -23,7 +23,7 @@ import { Entity } from 'src/app/config/entity';
   styleUrls: ['./radnik-list.component.css']
 })
 export class RadnikListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'ime', 'prezime', 'brojLk', 'opcije'];
+  displayedColumns: string[] = ['id', 'imePrezime', 'brojLk', 'obrazovanje', 'sektor', 'opcije'];
   dataSource: MatTableDataSource<Radnik>;
 
   subscription: Subscription;
@@ -86,7 +86,9 @@ export class RadnikListComponent implements OnInit {
       id: 0,
       ime: null, 
       prezime: null,
-      brojLk: null
+      brojLk: null,
+      obrazovanje: null,
+      sektor: null
     }});
 
     dialogRef.componentInstance.isUpdate = false;
