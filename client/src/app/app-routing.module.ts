@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'preduzece',
     loadChildren: () => import('./preduzece/preduzece.module').then(m => m.PreduzeceModule)
+  },
+  {
+    path: 'sektor',
+    loadChildren: () => import('./sektor/sektor.module').then(m => m.SektorModule)
   }
 ];
 

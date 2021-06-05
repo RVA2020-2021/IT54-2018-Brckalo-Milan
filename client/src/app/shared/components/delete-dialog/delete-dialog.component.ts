@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ObrazovanjeService } from 'src/app/obrazovanje/services/obrazovanje.service';
 import { PreduzeceService } from 'src/app/preduzece/services/preduzece.service';
+import { SektorService } from 'src/app/sektor/services/sektor.service';
 
 import { DeleteDialog } from '../../models/delete-dialog.model';
 
@@ -21,7 +22,8 @@ export class DeleteDialogComponent {
     private dialogRef: MatDialogRef<DeleteDialogComponent>,
     private snackbar: MatSnackBar,
     private obrazovanje: ObrazovanjeService,
-    private preduzece: PreduzeceService) {}
+    private preduzece: PreduzeceService,
+    private sektor: SektorService) {}
 
   cancel() {
     this.dialogRef.close();
@@ -42,6 +44,10 @@ export class DeleteDialogComponent {
 
         break;
       case Entity.SEKTOR:
+        this.sektor.delete(this.data.id).subscribe(
+          () => this.snackbar.open(`Uspješno izbrisali sektor sa ID-em ${this.data.id}.`, null, { duration: 2000 }), 
+          (error: Error) => this.snackbar.open('Dogodila se greška. Pogledajte u konzoli...', null, { duration: 2000 }));
+
         break;
       case Entity.RADNIK:
         break;

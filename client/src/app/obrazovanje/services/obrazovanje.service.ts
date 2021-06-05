@@ -23,11 +23,11 @@ export class ObrazovanjeService {
   }
 
   post(obrazovanje: Obrazovanje): Observable<any> {
-    return this.http.post<Obrazovanje>(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
+    return this.http.post(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
   }
 
   put(obrazovanje: Obrazovanje): Observable<any> {
-    return this.http.put<Obrazovanje>(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
+    return this.http.put(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
   }
 
   delete(obrazovanjeId: number): Observable<any> {

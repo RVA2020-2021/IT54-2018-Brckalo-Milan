@@ -23,11 +23,11 @@ export class PreduzeceService {
   }
 
   post(preduzece: Preduzece): Observable<any> {
-    return this.http.post<Preduzece>(`${API.path}/preduzece`, preduzece).pipe(catchError(this.handleError));
+    return this.http.post(`${API.path}/preduzece`, preduzece).pipe(catchError(this.handleError));
   }
 
   put(preduzece: Preduzece): Observable<any> {
-    return this.http.put<Preduzece>(`${API.path}/preduzece`, preduzece).pipe(catchError(this.handleError));
+    return this.http.put(`${API.path}/preduzece`, preduzece).pipe(catchError(this.handleError));
   }
 
   delete(preduzeceId: number): Observable<any> {
