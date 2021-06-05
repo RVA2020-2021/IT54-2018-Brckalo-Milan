@@ -1,0 +1,88 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon class="example-label" color="accent">school</mat-icon>
+    </div>
+    <mat-card-title>{{(preduzece$ | async)?.naziv}}</mat-card-title>
+    <mat-card-subtitle>ID: {{(preduzece$ | async)?.id}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="example-form">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+      <mat-form-field class="example-full-width" color="accent">
+        <input matInput placeholder="Naziv" [value]="(preduzece$ | async)?.naziv">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" color="accent">
+        <input matInput placeholder="Opis" [value]="(preduzece$ | async)?.opis">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" color="accent">
+        <input matInput placeholder="PIB" [value]="(preduzece$ | async)?.pib">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" color="accent">
+        <input matInput placeholder="Sedište" [value]="(preduzece$ | async)?.sediste">
+      </mat-form-field>
+    </form>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="example-action-buttons"></div>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Sektori</mat-panel-title>
+          <mat-panel-description>
+            Tabela sektora koji pripadaju ovom preduzeću
+            <mat-icon color="primary">engineering</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource1">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="naziv">
+              <th mat-header-cell *matHeaderCellDef>Naziv</th>
+              <td mat-cell *matCellDef="let element">{{element.naziv}}</td>
+            </ng-container>
+            <ng-container matColumnDef="oznaka">
+              <th mat-header-cell *matHeaderCellDef>Oznaka</th>
+              <td mat-cell *matCellDef="let element">{{element.oznaka}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Radnici</mat-panel-title>
+          <mat-panel-description>
+            Tabela radnika koji pripadaju ovom preduzeću
+            <mat-icon color="primary">people</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource2">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="imePrezime">
+              <th mat-header-cell *matHeaderCellDef>Ime i prezime</th>
+              <td mat-cell *matCellDef="let element">{{element.ime}} {{element.prezime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="brojLk">
+              <th mat-header-cell *matHeaderCellDef>BLK</th>
+              <td mat-cell *matCellDef="let element">{{element.brojLk}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

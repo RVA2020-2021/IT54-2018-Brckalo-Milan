@@ -11,12 +11,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { PreduzeceRoutingModule } from './preduzece-routing.module';
 
 import { PreduzeceComponent } from './preduzece.component';
 import { PreduzeceListComponent } from './components/preduzece-list/preduzece-list.component';
 import { PreduzeceDialogComponent } from './components/preduzece-dialog/preduzece-dialog.component';
+import { PreduzeceDetailComponent } from './components/preduzece-detail/preduzece-detail.component';
 
 import { PreduzeceService } from './services/preduzece.service';
 
@@ -24,7 +27,8 @@ import { PreduzeceService } from './services/preduzece.service';
   declarations: [
     PreduzeceComponent,
     PreduzeceListComponent,
-    PreduzeceDialogComponent
+    PreduzeceDialogComponent,
+    PreduzeceDetailComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +43,8 @@ import { PreduzeceService } from './services/preduzece.service';
     MatButtonModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatDividerModule,
+    MatExpansionModule,
     PreduzeceRoutingModule
   ],
   providers: [PreduzeceService]

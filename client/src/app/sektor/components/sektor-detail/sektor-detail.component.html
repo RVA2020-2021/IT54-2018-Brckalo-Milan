@@ -1,0 +1,50 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon class="example-label" color="accent">engineering</mat-icon>
+    </div>
+    <mat-card-title>{{(sektor$ | async)?.naziv}}</mat-card-title>
+    <mat-card-subtitle>ID: {{(sektor$ | async)?.id}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" color="accent">
+        <input matInput placeholder="Naziv" [value]="(sektor$ | async)?.naziv">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" color="accent">
+        <input matInput placeholder="Oznaka" [value]="(sektor$ | async)?.oznaka">
+      </mat-form-field>
+    </form>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Radnici</mat-panel-title>
+          <mat-panel-description>
+            Tabela radnika koji imaju isto obrazovanje
+            <mat-icon color="primary">people</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="imePrezime">
+              <th mat-header-cell *matHeaderCellDef>Ime i prezime</th>
+              <td mat-cell *matCellDef="let element">{{element.ime}} {{element.prezime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="brojLk">
+              <th mat-header-cell *matHeaderCellDef>BLK</th>
+              <td mat-cell *matCellDef="let element">{{element.brojLk}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

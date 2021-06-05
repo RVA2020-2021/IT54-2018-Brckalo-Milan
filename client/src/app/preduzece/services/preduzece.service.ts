@@ -19,7 +19,7 @@ export class PreduzeceService {
   }
 
   getOne(preduzeceId: number): Observable<Preduzece> {
-    return this.http.get<Preduzece>(`${API.path}/${preduzeceId}`).pipe(catchError(this.handleError));
+    return this.http.get<Preduzece>(`${API.path}/preduzece/${preduzeceId}`).pipe(catchError(this.handleError));
   }
 
   post(preduzece: Preduzece): Observable<any> {

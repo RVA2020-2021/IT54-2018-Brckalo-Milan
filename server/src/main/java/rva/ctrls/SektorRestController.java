@@ -37,6 +37,12 @@ public class SektorRestController {
 		return sektorRepository.findAll();
 	}
 	
+	@GetMapping("sektor/preduzece/{p}")
+	@ApiOperation(value="Vraca kolekciju svih sektora sa odgovarajucim preduzecem")
+	public Collection<Sektor> getListByPreduzece(@PathVariable("p") Integer id) {
+		return sektorRepository.findAllByCurrentPreduzece(id);
+	}
+	
 	@GetMapping("sektor/{id}")
 	@ApiOperation(value="Vraca sektor sa odgovarajucim ID-em")
 	public Sektor get(@PathVariable("id") Integer id) {

@@ -11,12 +11,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ObrazovanjeRoutingModule } from './obrazovanje-routing.module';
 
 import { ObrazovanjeComponent } from './obrazovanje.component';
 import { ObrazovanjeListComponent } from './components/obrazovanje-list/obrazovanje-list.component';
 import { ObrazovanjeDialogComponent } from './components/obrazovanje-dialog/obrazovanje-dialog.component';
+import { ObrazovanjeDetailComponent } from './components/obrazovanje-detail/obrazovanje-detail.component';
 
 import { ObrazovanjeService } from './services/obrazovanje.service';
 
@@ -24,7 +27,8 @@ import { ObrazovanjeService } from './services/obrazovanje.service';
   declarations: [
     ObrazovanjeComponent,
     ObrazovanjeListComponent,
-    ObrazovanjeDialogComponent
+    ObrazovanjeDialogComponent,
+    ObrazovanjeDetailComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +43,8 @@ import { ObrazovanjeService } from './services/obrazovanje.service';
     MatButtonModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatDividerModule,
+    MatExpansionModule,
     ObrazovanjeRoutingModule
   ],
   providers: [ObrazovanjeService]

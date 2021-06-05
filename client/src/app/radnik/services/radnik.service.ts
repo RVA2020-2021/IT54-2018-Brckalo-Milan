@@ -18,6 +18,18 @@ export class RadnikService {
     return this.http.get<Radnik[]>(`${API.path}/radnik`).pipe(catchError(this.handleError));
   }
 
+  getListByObrazovanje(obrazovanjeId: number): Observable<Radnik[]> {
+    return this.http.get<Radnik[]>(`${API.path}/radnik/obrazovanje/${obrazovanjeId}`).pipe(catchError(this.handleError));
+  }
+
+  getListByPreduzece(preduzeceId: number): Observable<Radnik[]> {
+    return this.http.get<Radnik[]>(`${API.path}/radnik/preduzece/${preduzeceId}`).pipe(catchError(this.handleError));
+  }
+
+  getListBySektor(sektorId: number): Observable<Radnik[]> {
+    return this.http.get<Radnik[]>(`${API.path}/radnik/sektor/${sektorId}`).pipe(catchError(this.handleError));
+  }
+
   getOne(radnikId: number): Observable<Radnik> {
     return this.http.get<Radnik>(`${API.path}/${radnikId}`).pipe(catchError(this.handleError));
   }

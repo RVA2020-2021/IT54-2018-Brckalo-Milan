@@ -37,6 +37,24 @@ public class RadnikRestController {
 		return radnikRepository.findAll();
 	}
 	
+	@GetMapping("radnik/obrazovanje/{o}")
+	@ApiOperation(value="Vraca kolekciju svih radnika sa odgovarajucim obrazovanjem")
+	public Collection<Radnik> getListByObrazovanje(@PathVariable("o") Integer id) {
+		return radnikRepository.findAllByCurrentObrazovanje(id);
+	}
+	
+	@GetMapping("radnik/preduzece/{p}")
+	@ApiOperation(value="Vraca kolekciju svih radnika sa odgovarajucim preduzecem")
+	public Collection<Radnik> getListByPreduzece(@PathVariable("p") Integer id) {
+		return radnikRepository.findAllByCurrentPreduzece(id);
+	}
+	
+	@GetMapping("radnik/sektor/{s}")
+	@ApiOperation(value="Vraca kolekciju svih radnika sa odgovarajucim sektorom")
+	public Collection<Radnik> getListBySektor(@PathVariable("s") Integer id) {
+		return radnikRepository.findAllByCurrentSektor(id);
+	}
+	
 	@GetMapping("radnik/q")
 	@ApiOperation(value="Vraca kolekciju radnika po imenu ili prezimenu")
 	public Collection<Radnik> getListByQuery(@RequestParam(name="ime", required=false, defaultValue="") String ime, @RequestParam(name="prezime", required=false, defaultValue="") String prezime) {

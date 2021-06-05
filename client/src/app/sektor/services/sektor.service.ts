@@ -18,6 +18,10 @@ export class SektorService {
     return this.http.get<Sektor[]>(`${API.path}/sektor`).pipe(catchError(this.handleError));
   }
 
+  getListByPreduzece(preduzeceId: number): Observable<Sektor[]> {
+    return this.http.get<Sektor[]>(`${API.path}/sektor/preduzece/${preduzeceId}`).pipe(catchError(this.handleError));
+  }
+
   getOne(sektorId: number): Observable<Sektor> {
     return this.http.get<Sektor>(`${API.path}/sektor/${sektorId}`).pipe(catchError(this.handleError));
   }

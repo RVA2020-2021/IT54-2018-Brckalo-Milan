@@ -19,7 +19,7 @@ export class ObrazovanjeService {
   }
 
   getOne(obrazovanjeId: number): Observable<Obrazovanje> {
-    return this.http.get<Obrazovanje>(`${API.path}/${obrazovanjeId}`).pipe(catchError(this.handleError));
+    return this.http.get<Obrazovanje>(`${API.path}/obrazovanje/${obrazovanjeId}`).pipe(catchError(this.handleError));
   }
 
   post(obrazovanje: Obrazovanje): Observable<any> {
