@@ -2,26 +2,26 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Obrazovanje } from '../../interfaces/obrazovanje.interface';
+import { Obrazovanje } from '../../models/obrazovanje.model';
 
 import { ObrazovanjeService } from '../../services/obrazovanje.service';
 
 @Component({
-  selector: 'app-obrazovanje-single',
-  templateUrl: './obrazovanje-single.component.html',
-  styleUrls: ['./obrazovanje-single.component.css']
+  selector: 'app-obrazovanje-dialog',
+  templateUrl: './obrazovanje-dialog.component.html',
+  styleUrls: ['./obrazovanje-dialog.component.css']
 })
-export class ObrazovanjeSingleComponent implements OnInit {
+export class ObrazovanjeDialogComponent implements OnInit {
   isUpdate: boolean;
   title: string;
 
   constructor(
     private service: ObrazovanjeService,
-    private dialogRef: MatDialogRef<ObrazovanjeSingleComponent>,
+    private dialogRef: MatDialogRef<ObrazovanjeDialogComponent>,
     private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: Obrazovanje) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.title = this.isUpdate ? 'Ažuriranje podataka o obrazovanju' : 'Kreiranje novog obrazovanja';
   }
 
@@ -43,7 +43,7 @@ export class ObrazovanjeSingleComponent implements OnInit {
       (error: Error) => this.snackbar.open('Dogodila se greška. Pogledajte u konzoli...', null, { duration: 2000 }));
   }
 
-  cancel(): void {
+  cancel() {
     this.dialogRef.close();
   }
 }

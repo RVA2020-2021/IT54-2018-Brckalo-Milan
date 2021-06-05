@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Obrazovanje } from '../interfaces/obrazovanje.interface';
+import { Obrazovanje } from '../models/obrazovanje.model';
 
 import { API } from 'src/app/config/api';
 
@@ -22,16 +22,16 @@ export class ObrazovanjeService {
     return this.http.get<Obrazovanje>(`${API.path}/${obrazovanjeId}`).pipe(catchError(this.handleError));
   }
 
-  post(obrazovanje: Obrazovanje): Observable<Obrazovanje> {
+  post(obrazovanje: Obrazovanje): Observable<any> {
     return this.http.post<Obrazovanje>(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
   }
 
-  put(obrazovanje: Obrazovanje): Observable<Obrazovanje> {
+  put(obrazovanje: Obrazovanje): Observable<any> {
     return this.http.put<Obrazovanje>(`${API.path}/obrazovanje`, obrazovanje).pipe(catchError(this.handleError));
   }
 
-  delete(obrazovanjeId: number): Observable<unknown> {
-    return this.http.delete(`${API.path}/${obrazovanjeId}`).pipe(catchError(this.handleError));
+  delete(obrazovanjeId: number): Observable<any> {
+    return this.http.delete(`${API.path}/obrazovanje/${obrazovanjeId}`).pipe(catchError(this.handleError));
   }
 
   handleError(error: HttpErrorResponse) {

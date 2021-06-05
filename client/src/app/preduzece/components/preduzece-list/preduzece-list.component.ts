@@ -6,32 +6,32 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Subscription } from 'rxjs';
 
-import { Obrazovanje } from '../../models/obrazovanje.model';
+import { Preduzece } from '../../models/preduzece.model';
 
-import { ObrazovanjeService } from '../../services/obrazovanje.service';
+import { PreduzeceService } from '../../services/preduzece.service';
 
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
-import { ObrazovanjeDialogComponent } from '../obrazovanje-dialog/obrazovanje-dialog.component';
+import { PreduzeceDialogComponent } from '../preduzece-dialog/preduzece-dialog.component';
 
 import { DeleteDialog } from 'src/app/shared/models/delete-dialog.model';
 
 import { Entity } from 'src/app/config/entity';
 
 @Component({
-  selector: 'app-obrazovanje-list',
-  templateUrl: './obrazovanje-list.component.html',
-  styleUrls: ['./obrazovanje-list.component.css']
+  selector: 'app-preduzece-list',
+  templateUrl: './preduzece-list.component.html',
+  styleUrls: ['./preduzece-list.component.css']
 })
-export class ObrazovanjeListComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['id', 'naziv', 'opis', 'sss', 'opcije'];
-  dataSource: MatTableDataSource<Obrazovanje>;
+export class PreduzeceListComponent implements OnInit, OnDestroy {
+  displayedColumns: string[] = ['id', 'naziv', 'opis', 'pib', 'sediste', 'opcije'];
+  dataSource: MatTableDataSource<Preduzece>;
 
   subscription: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
-  constructor(private service: ObrazovanjeService, private dialog: MatDialog) {}
+  constructor(private service: PreduzeceService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.loadData();
@@ -42,16 +42,16 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
-    this.subscription = this.service.getList().subscribe((data: Obrazovanje[]) => {
+    this.subscription = this.service.getList().subscribe((data: Preduzece[]) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
   }
 
-  editData(obrazovanje: Obrazovanje) {
-    const dialogRef = this.dialog.open(ObrazovanjeDialogComponent, { 
-      data: obrazovanje 
+  editData(preduzece: Preduzece) {
+    const dialogRef = this.dialog.open(PreduzeceDialogComponent, { 
+      data: preduzece 
     });
 
     dialogRef.componentInstance.isUpdate = true;
@@ -61,9 +61,9 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteData(obrazovanjeId: number) {
+  deleteData(preduzeceId: number) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, { 
-      data: new DeleteDialog(Entity.OBRAZOVANJE, obrazovanjeId)
+      data: new DeleteDialog(Entity.PREDUZECE, preduzeceId)
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -82,11 +82,12 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ObrazovanjeDialogComponent, { data: { 
+    const dialogRef = this.dialog.open(PreduzeceDialogComponent, { data: { 
       id: 0,
       naziv: null, 
       opis: null, 
-      stepenStrucneSpreme: null 
+      pib: null,
+      sediste: null 
     }});
 
     dialogRef.componentInstance.isUpdate = false;

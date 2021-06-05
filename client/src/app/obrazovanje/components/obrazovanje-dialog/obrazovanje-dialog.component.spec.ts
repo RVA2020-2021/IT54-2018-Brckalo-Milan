@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ObrazovanjeSingleComponent } from './obrazovanje-single.component';
+import { ObrazovanjeDialogComponent } from './obrazovanje-dialog.component';
 
-describe('ObrazovanjeSingleComponent', () => {
-  let component: ObrazovanjeSingleComponent;
-  let fixture: ComponentFixture<ObrazovanjeSingleComponent>;
+describe('ObrazovanjeDialogComponent', () => {
+  let component: ObrazovanjeDialogComponent;
+  let fixture: ComponentFixture<ObrazovanjeDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ObrazovanjeSingleComponent ]
+      declarations: [ ObrazovanjeDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ObrazovanjeSingleComponent);
+    fixture = TestBed.createComponent(ObrazovanjeDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

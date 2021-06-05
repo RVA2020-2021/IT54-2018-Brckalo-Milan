@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+}
+
+.form {
+  display: flex;
+}
+
+.mat-form-field {
+  flex-grow: 1;
+}
+
+button {
+  margin-right: 8px;
+}

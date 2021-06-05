@@ -4,9 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { AppRoutingModule } from './app-routing.module';
-
 import { SharedModule } from './shared/shared.module';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
@@ -17,8 +17,8 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    SharedModule,
     AppRoutingModule,
-    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

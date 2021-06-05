@@ -12,19 +12,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { ObrazovanjeRoutingModule } from './obrazovanje-routing.module';
+import { PreduzeceRoutingModule } from './preduzece-routing.module';
 
-import { ObrazovanjeComponent } from './obrazovanje.component';
-import { ObrazovanjeListComponent } from './components/obrazovanje-list/obrazovanje-list.component';
-import { ObrazovanjeDialogComponent } from './components/obrazovanje-dialog/obrazovanje-dialog.component';
+import { PreduzeceComponent } from './preduzece.component';
+import { PreduzeceListComponent } from './components/preduzece-list/preduzece-list.component';
+import { PreduzeceDialogComponent } from './components/preduzece-dialog/preduzece-dialog.component';
 
-import { ObrazovanjeService } from './services/obrazovanje.service';
+import { PreduzeceService } from './services/preduzece.service';
 
 @NgModule({
   declarations: [
-    ObrazovanjeComponent,
-    ObrazovanjeListComponent,
-    ObrazovanjeDialogComponent
+    PreduzeceComponent,
+    PreduzeceListComponent,
+    PreduzeceDialogComponent
   ],
   imports: [
     CommonModule,
@@ -39,8 +39,8 @@ import { ObrazovanjeService } from './services/obrazovanje.service';
     MatButtonModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    ObrazovanjeRoutingModule
+    PreduzeceRoutingModule
   ],
-  providers: [ObrazovanjeService]
+  providers: [PreduzeceService]
 })
-export class ObrazovanjeModule {}
+export class PreduzeceModule {}

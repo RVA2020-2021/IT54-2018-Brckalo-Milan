@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-menu',
@@ -6,4 +7,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./menu.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuComponent{}
+export class MenuComponent {
+  constructor(private dialog: MatDialog) {}
+}
