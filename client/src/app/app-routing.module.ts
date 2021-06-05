@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'sektor',
     loadChildren: () => import('./sektor/sektor.module').then(m => m.SektorModule)
+  },
+  {
+    path: 'radnik',
+    loadChildren: () => import('./radnik/radnik.module').then(m => m.RadnikModule)
   }
 ];
 

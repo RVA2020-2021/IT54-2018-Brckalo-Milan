@@ -1,0 +1,24 @@
+<div class="container">
+  <h3 mat-dialog-title>{{title}}</h3>
+  <form class="mat-dialog-content" #formControl="ngForm" autocomplete="off">
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Ime" [(ngModel)]="data.ime" name="ime">
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Prezime" [(ngModel)]="data.prezime" name="prezime">
+      </mat-form-field>
+    </div>
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="Broj lične karte" [(ngModel)]="data.brojLk" name="brojLk">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="cancel()">Poništi</button>
+      <button mat-raised-button color="accent" (click)="save()">Sačuvaj</button>
+    </div>
+  </form>
+</div>
