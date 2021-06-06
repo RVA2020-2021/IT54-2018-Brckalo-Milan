@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,10 @@ const routes: Routes = [
   {
     path: 'radnik',
     loadChildren: () => import('./radnik/radnik.module').then(m => m.RadnikModule)
+  },
+  { 
+    path: '**',
+    component: PageNotFoundComponent 
   }
 ];
 

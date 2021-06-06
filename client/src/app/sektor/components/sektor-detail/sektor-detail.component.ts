@@ -15,7 +15,7 @@ import { RadnikService } from 'src/app/radnik/services/radnik.service';
   templateUrl: './sektor-detail.component.html',
   styleUrls: ['./sektor-detail.component.css']
 })
-export class SektorDetailComponent implements OnInit {
+export class SektorDetailComponent implements OnInit, OnDestroy {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   displayedColumns = ['id', 'imePrezime', 'brojLk'];
@@ -23,7 +23,7 @@ export class SektorDetailComponent implements OnInit {
   
   sektor$: Observable<Sektor>;
 
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,

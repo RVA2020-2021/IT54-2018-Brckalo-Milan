@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+
+import { BottomSheetMenuComponent } from '../bottom-sheet-menu/bottom-sheet-menu.component';
 
 @Component({
   selector: 'app-menu',
@@ -8,5 +10,9 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent {
-  constructor(private dialog: MatDialog) {}
+  constructor(private bottomSheet: MatBottomSheet) {}
+
+  openBottomSheet() {
+    this.bottomSheet.open(BottomSheetMenuComponent);
+  }
 }

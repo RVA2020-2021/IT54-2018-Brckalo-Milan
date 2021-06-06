@@ -34,7 +34,7 @@ export class ObrazovanjeDetailComponent implements OnInit, OnDestroy {
     let id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
     this.obrazovanje$ = this.obrazovanje.getOne(id);
-    
+
     this.subscription = this.radnik.getListByObrazovanje(id).subscribe(data => this.dataSource = data);
   }
 
