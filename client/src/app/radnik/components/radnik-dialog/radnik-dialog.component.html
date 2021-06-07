@@ -19,7 +19,7 @@
     <div class="form">
       <mat-form-field color="accent" appearance="fill">
         <mat-label>Obrazovanje</mat-label>
-        <mat-select [(ngModel)]="data.obrazovanje" [value]="data.obrazovanje" name="obrazovanje" required>
+        <mat-select [(ngModel)]="data.obrazovanje" [compareWith]="focusOnSelected" name="obrazovanje" required>
           <mat-option *ngFor="let o of (obrazovanje$ | async)" [value]="o">
             {{o.naziv}}
           </mat-option>
@@ -29,7 +29,7 @@
     <div class="form">
       <mat-form-field color="accent" appearance="fill">
         <mat-label>Sektor (Preduzece)</mat-label>
-        <mat-select [(ngModel)]="data.sektor" [value]="data.sektor" name="sektor" required>
+        <mat-select [(ngModel)]="data.sektor" [compareWith]="focusOnSelected" name="sektor" required>
           <mat-option *ngFor="let s of (sektor$ | async)" [value]="s">
             {{s.naziv}} ({{s.preduzece.naziv}})
           </mat-option>

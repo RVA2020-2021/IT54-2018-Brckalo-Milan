@@ -22,9 +22,11 @@ export class PreduzeceDetailComponent implements OnInit, OnDestroy {
 
   displayedColumns1 = ['id', 'naziv', 'oznaka'];
   dataSource1: Sektor[];
+  isEmpty1: boolean;
 
   displayedColumns2 = ['id', 'imePrezime', 'brojLk'];
   dataSource2: Radnik[];
+  isEmpty2: boolean;
   
   preduzece$: Observable<Preduzece>;
 
@@ -42,8 +44,14 @@ export class PreduzeceDetailComponent implements OnInit, OnDestroy {
 
     this.preduzece$ = this.preduzece.getOne(id);
     
-    this.subscription1 = this.sektor.getListByPreduzece(id).subscribe(data => this.dataSource1 = data);
-    this.subscription2 = this.radnik.getListByPreduzece(id).subscribe(data => this.dataSource2 = data);
+    this.subscription1 = this.sektor.getListByPreduzece(id).subscribe(data => {
+      this.isEmpty1 = data.length === 0;
+      this.dataSource1 = data;
+    });
+    this.subscription2 = this.radnik.getListByPreduzece(id).subscribe(data => {
+      this.isEmpty2 = data.length === 0;
+      this.dataSource2 = data;
+    });
   }
 
   ngOnDestroy() {

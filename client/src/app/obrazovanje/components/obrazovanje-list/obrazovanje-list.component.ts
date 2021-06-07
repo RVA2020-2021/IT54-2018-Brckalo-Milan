@@ -43,7 +43,7 @@ export class ObrazovanjeListComponent implements OnInit, OnDestroy {
 
   loadData() {
     this.subscription = this.service.getList().subscribe((data: Obrazovanje[]) => {
-      this.dataSource = new MatTableDataSource(data);
+      this.dataSource = new MatTableDataSource(data.sort((a, b) => a.id - b.id));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

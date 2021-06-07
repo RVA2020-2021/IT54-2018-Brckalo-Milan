@@ -30,17 +30,19 @@
         <ng-container matColumnDef="obrazovanje">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Obrazovanje</th>
           <td mat-cell *matCellDef="let row">
-            <mat-chip-list>
-              <mat-chip selected>{{row.obrazovanje.naziv}}</mat-chip>
-            </mat-chip-list>
+            <a class="example-a" [routerLink]="['/obrazovanje', row.obrazovanje.id]">
+              <mat-chip-list>
+                <mat-chip selected>{{row.obrazovanje.naziv}}</mat-chip>
+              </mat-chip-list>
+            </a>
           </td>
         </ng-container>
         <ng-container matColumnDef="sektor">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Sektor / Preduzeće</th>
           <td mat-cell *matCellDef="let row">
             <mat-chip-list>
-              <mat-chip>{{row.sektor.naziv}}</mat-chip>
-              <mat-chip color="accent" selected>{{row.sektor.preduzece.naziv}}</mat-chip>
+              <a class="example-a" [routerLink]="['/sektor', row.sektor.id]"><mat-chip>{{row.sektor.naziv}}</mat-chip></a>
+              <a class="example-a" [routerLink]="['/preduzece', row.sektor.preduzece.id]"><mat-chip color="accent" selected>{{row.sektor.preduzece.naziv}}</mat-chip></a>
             </mat-chip-list>
           </td>
         </ng-container>

@@ -20,6 +20,7 @@ export class SektorDetailComponent implements OnInit, OnDestroy {
 
   displayedColumns = ['id', 'imePrezime', 'brojLk'];
   dataSource: Radnik[];
+  isEmpty: boolean;
   
   sektor$: Observable<Sektor>;
 
@@ -35,7 +36,10 @@ export class SektorDetailComponent implements OnInit, OnDestroy {
 
     this.sektor$ = this.sektor.getOne(id);
     
-    this.subscription = this.radnik.getListBySektor(id).subscribe(data => this.dataSource = data);
+    this.subscription = this.radnik.getListBySektor(id).subscribe(data => {
+      this.isEmpty = data.length === 0;
+      this.dataSource = data;
+    });
   }
 
   ngOnDestroy() {

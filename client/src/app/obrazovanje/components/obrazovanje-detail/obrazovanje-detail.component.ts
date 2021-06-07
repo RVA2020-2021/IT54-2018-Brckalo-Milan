@@ -20,6 +20,7 @@ export class ObrazovanjeDetailComponent implements OnInit, OnDestroy {
 
   displayedColumns = ['id', 'imePrezime', 'brojLk'];
   dataSource: Radnik[];
+  isEmpty: boolean;
   
   obrazovanje$: Observable<Obrazovanje>;
 
@@ -35,7 +36,10 @@ export class ObrazovanjeDetailComponent implements OnInit, OnDestroy {
 
     this.obrazovanje$ = this.obrazovanje.getOne(id);
 
-    this.subscription = this.radnik.getListByObrazovanje(id).subscribe(data => this.dataSource = data);
+    this.subscription = this.radnik.getListByObrazovanje(id).subscribe(data => {
+      this.isEmpty = data.length === 0;
+      this.dataSource = data;
+    });
   }
 
   ngOnDestroy() {

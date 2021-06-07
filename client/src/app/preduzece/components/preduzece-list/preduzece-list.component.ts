@@ -43,7 +43,7 @@ export class PreduzeceListComponent implements OnInit, OnDestroy {
 
   loadData() {
     this.subscription = this.service.getList().subscribe((data: Preduzece[]) => {
-      this.dataSource = new MatTableDataSource(data);
+      this.dataSource = new MatTableDataSource(data.sort((a, b) => a.id - b.id));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

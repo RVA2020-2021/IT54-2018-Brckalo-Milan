@@ -29,12 +29,12 @@
     <br>
     <div class="example-action-buttons"></div>
     <mat-accordion class="example-headers-align">
-      <mat-expansion-panel>
+      <mat-expansion-panel [disabled]="isEmpty1">
         <mat-expansion-panel-header>
           <mat-panel-title>Sektori</mat-panel-title>
           <mat-panel-description>
             Tabela sektora koji pripadaju ovom preduzeću
-            <mat-icon color="primary">engineering</mat-icon>
+            <mat-icon color="warn">engineering</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="example-container mat-elevation-z8">
@@ -56,12 +56,12 @@
           </table>
         </div>
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [disabled]="isEmpty2">
         <mat-expansion-panel-header>
           <mat-panel-title>Radnici</mat-panel-title>
           <mat-panel-description>
             Tabela radnika koji pripadaju ovom preduzeću
-            <mat-icon color="primary">people</mat-icon>
+            <mat-icon color="warn">people</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="example-container mat-elevation-z8">

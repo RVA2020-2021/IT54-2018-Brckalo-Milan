@@ -30,9 +30,11 @@
         <ng-container matColumnDef="preduzece">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Preduzeće</th>
           <td mat-cell *matCellDef="let row">
-            <mat-chip-list>
-              <mat-chip selected>{{row.preduzece.naziv}}</mat-chip>
-            </mat-chip-list>
+            <a class="example-a" [routerLink]="['/preduzece/', row.preduzece.id]">
+              <mat-chip-list>
+                <mat-chip selected>{{row.preduzece.naziv}}</mat-chip>
+              </mat-chip-list>
+            </a>
           </td>
         </ng-container>
         <ng-container matColumnDef="opcije">

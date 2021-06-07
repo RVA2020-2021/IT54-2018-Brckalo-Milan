@@ -18,12 +18,12 @@
     <mat-divider></mat-divider>
     <br>
     <mat-accordion class="example-headers-align">
-      <mat-expansion-panel>
+      <mat-expansion-panel [disabled]="isEmpty">
         <mat-expansion-panel-header>
           <mat-panel-title>Radnici</mat-panel-title>
           <mat-panel-description>
             Tabela radnika koji imaju isto obrazovanje
-            <mat-icon color="primary">people</mat-icon>
+            <mat-icon color="warn">people</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="example-container mat-elevation-z8">

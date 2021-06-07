@@ -43,7 +43,7 @@ export class SektorListComponent implements OnInit {
 
   loadData() {
     this.subscription = this.service.getList().subscribe((data: Sektor[]) => {
-      this.dataSource = new MatTableDataSource(data);
+      this.dataSource = new MatTableDataSource(data.sort((a, b) => a.id - b.id));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
