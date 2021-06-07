@@ -12,7 +12,7 @@ public class StarterProjectApplication {
 	@RequestMapping("/")
     @ResponseBody
     String home() {
-      return "Hello from PetiZadatak API!";
+      return "Zdravo od PetiZadatak API!";
     }
 
 	public static void main(String[] args) {

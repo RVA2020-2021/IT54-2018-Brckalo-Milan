@@ -1,3 +1,5 @@
 export const API = {
-  path: 'http://localhost:8080'
+  path: 'https://peti-zadatak.herokuapp.com'
 };
+
+// Za lokalno pokretanje: 'http://localhost:8080'
